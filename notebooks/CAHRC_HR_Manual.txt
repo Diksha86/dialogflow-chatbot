@@ -1,0 +1,37 @@
+cloud Pub/Sub
+
+Cloud Pub/Sub brings the flexibility and reliability of enterprise message-oriented middleware to the cloud. At the same time, Cloud Pub/Sub is a scalable, durable event ingestion and delivery system that serves as a foundation for modern stream analytics pipelines.
+
+topic
+
+A named resource to which messages are sent by publishers.
+
+subscription
+
+A named resource representing the stream of messages from a single, specific topic, to be delivered to the subscribing application.
+
+message
+
+The combination of data and (optional) attributes that a publisher sends to a topic and is eventually delivered to subscribers.
+
+message attribute
+
+A key-value pair that a publisher can define for a message. For example, key iana.org/language_tag and value en could be added to messages to mark them as readable by an English-speaking subscriber.
+
+publisher-subscriber relationships
+
+A publisher application creates and sends messages to a topic. Subscriber applications create a subscription to a topic to receive messages from it. Communication can be one-to-many (fan-out), many-to-one (fan-in), and many-to-many.
+
+message flow
+
+1.A publisher application creates a topic in the Cloud Pub/Sub service and sends messages to the topic. A message contains a payload and optional attributes that describe the payload content.
+2.The service ensures that published messages are retained on behalf of subscriptions. A published message is retained for a subscription until it is acknowledged by any subscriber consuming messages from that subscription.
+3.Cloud Pub/Sub forwards messages from a topic to all of its subscriptions, individually. Each subscription receives messages either by Cloud Pub/Sub pushing them to the subscriber's chosen endpoint, or by the subscriber pulling them from the service.
+4.The subscriber receives pending messages from its subscription and acknowledges each one to the Cloud Pub/Sub service.
+5.When a message is acknowledged by the subscriber, it is removed from the subscription's message queue.
+
+
+publisher and subscriber endpoints
+
+Publishers can be any application that can make HTTPS requests to googleapis.com: an App Engine app, a web service hosted on Google Compute Engine or any other third-party network, an installed app for desktop or mobile device, or even a browser.Pull subscribers can also be any application that can make HTTPS requests to googleapis.com. Push subscribers must be Webhook endpoints that can accept POST requests over HTTPS.
+
